@@ -7,14 +7,12 @@ local FILES = {
 }
 
 for _, f in ipairs(FILES) do
-    if not isfile(f.name) then
-        local ok, content = pcall(function() return game:HttpGet(f.url) end)
-        if ok and content and #content > 100 then
-            writefile(f.name, content)
-        else
-            warn("[AFQ] Erreur téléchargement : " .. f.name)
-            return
-        end
+    local ok, content = pcall(function() return game:HttpGet(f.url) end)
+    if ok and content and #content > 100 then
+        writefile(f.name, content)
+    else
+        warn("[AFQ] Erreur téléchargement : " .. f.name)
+        return
     end
 end
 
